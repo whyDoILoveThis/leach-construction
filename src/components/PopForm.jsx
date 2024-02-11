@@ -21,6 +21,7 @@ const PopForm = ({
     showQuoteForm: PropTypes.bool.isRequired,
   };
   const [formData, setFormData] = useState({
+    service: "",
     type: "",
     name: "",
     email: "",
@@ -31,9 +32,12 @@ const PopForm = ({
 
   useEffect(() => {
     showCustomerService
-      ? setFormData({ ...formData, type: "Customer Service" })
+      ? setFormData({
+          ...formData,
+          service: `${formData.type} Customer Service`,
+        })
       : null;
-  });
+  }, [showCustomerService, formData]);
 
   useEffect(() => {
     const generateFingerprint = async () => {
@@ -193,6 +197,13 @@ const PopForm = ({
                         onClick={(e) => {
                           e.preventDefault();
                           setOpenForm(false);
+                          setFormData({
+                            type: "",
+                            name: "",
+                            email: "",
+                            phone: "",
+                            message: "",
+                          });
                         }}
                       >
                         <img

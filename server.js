@@ -45,7 +45,7 @@ app.use(cors());
 // Route to send email
 app.post('/server', async (req, res) => {
     try {
-        const {type, name, email, phone, message } = req.body;
+        const {service, type, name, email, phone, message } = req.body;
 
         // Check if sending email is allowed based on remaining time
         const remainingTime = calculateRemainingTime();
@@ -76,7 +76,7 @@ app.post('/server', async (req, res) => {
             to: 'iannsmif@gmail.com',
             from: 'iannsmif@gmail.com',
             subject: `${newType === 'New Message' ? `📨 ${name}` :
-             newType === 'Customer Service' ? `👷‍♂️ ${name}` :
+             service === `${newType} Customer Service` ? `👷‍♂️ ${name}` :
               `💰💲 ${name}` }`,
             text: 'Someone sent you a message.',
             html: `<html lang="en">
@@ -116,7 +116,7 @@ app.post('/server', async (req, res) => {
             <body>
                 <div class="container">
                     <h1>${newType === 'New Message' ? newType :
-                     newType === 'Customer Service' ? newType :
+                     service === `${newType} Customer Service` ? `${newType} Customer Service Request` :
                       `${newType} Job Available 💵` }
                     </h1>
                     <div class="message">

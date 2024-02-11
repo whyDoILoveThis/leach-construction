@@ -53,12 +53,14 @@ const BtnGroup = ({ contact, customerSevice, quote }) => {
           </button>
         )
       )}
-      <button
-        onClick={handleQuote}
-        className="btn text-btn-primary border-btn-primary"
-      >
-        Get a Quote
-      </button>
+      {quote && (
+        <button
+          onClick={handleQuote}
+          className="btn text-btn-primary border-btn-primary"
+        >
+          Get a Quote
+        </button>
+      )}
       {showGetQuote || showContact || showCustomerService ? (
         <PopForm
           openForm={openForm}

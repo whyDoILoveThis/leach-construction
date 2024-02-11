@@ -30,7 +30,7 @@ const NavBar = () => {
         </li>
         <li>
           <Link to={"/contact"} className="link">
-            Contact
+            Contact Info
           </Link>
         </li>
       </ul>
