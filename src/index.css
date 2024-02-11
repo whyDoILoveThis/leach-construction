@@ -50,8 +50,8 @@ h1 {
 }
 
 .app, .nav {
-    width: 800px;
-    max-width: 800px;
+    width: 100%;
+    max-width: 1280px;
 }
 
 .nav {
@@ -211,7 +211,55 @@ h1 {
     color: black;
 }
 
+.dropdown-selector {
+    width: fit-content;
+    padding: 10px 30px 0;
+    border-top-right-radius: 17px;
+    border-top-left-radius: 17px;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid whitesmoke;
+    border-bottom: none;
+    transform: translateY(2px);
+    background-color: #101010;
+}
 
+.dropdown-selector-rounded {
+    border-radius: 17px;
+    padding-bottom: 10px;
+    border: none;
+}
+
+.dropdown-heading {
+    font-family: 'Miriam Libre';
+    font-size: 22px;
+}
+
+.dropdown-icon {
+    transition: transform 0.3s ease;
+}
+
+.dropdown-icon-up {
+    transform: rotateX(-180deg);
+    transition: transform 0.3s ease;
+}
+
+.dropdown-text {
+    border: 1px solid whitesmoke;
+    max-height: 0px;
+    padding: 0 1.5rem; 
+    transition: max-height 0.4s ease-in-out, padding 0.5s ease, border 0.2s;
+    border: 0px solid transparent;
+    overflow: hidden;
+}
+
+.dropdown-text-shown {
+    max-height: 300px;
+    transition: max-height 0.4s ease-in-out, padding 0.2s ease, border 0.2s;
+    padding: 1.5rem;
+    overflow: hidden;
+    border: 1px solid whitesmoke;
+}
 
 
 .footer {
@@ -240,5 +288,7 @@ gap: 14px
 .location {
     width: 60%;
 }
+
+
 
 
