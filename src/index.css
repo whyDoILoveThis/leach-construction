@@ -54,15 +54,8 @@ h1 {
     max-width: 800px;
 }
 
-@media screen and (max-width: 800px) {
-    .app, .nav {
-        width: 100%;
-        max-width: 100%;
-    }
-}
-
 .nav {
-    z-index: 999;
+    z-index: 9;
     backdrop-filter: blur(4px);
 }
 
@@ -88,9 +81,78 @@ h1 {
     font-weight: 500;
 }
 
+.input {
+    border-radius: 17px;
+    font-size: 16px;
+    padding: 10px;
+    padding-left: 14px;
+    padding-top: 6px;
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+.textarea {
+    width: 400px;
+}
+
+.pop-form {
+    font-size: 16px;
+}
+
+.pop-bg {
+    max-width: 800px;
+    width: 80%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.169);
+    border-radius: 17px;
+    margin-top: 4rem;
+    padding: 0 3rem;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.341);
+}
+
+@media screen and (max-width: 500px) {
+   .hero-tag {
+    width: 100%;
+   }
+ }
+ 
+
+@media screen and (max-width: 600px) {
+   .input {
+    width: 100%;
+   }
+   .textarea {
+    width: 100%;
+   }
+   .pop-bg {
+    width: 100%;
+   }
+}
+
+@media screen and (max-width: 800px) {
+    .app, .nav {
+        width: 100%;
+        max-width: 100%;
+    }
+    .form-wrap {
+        flex-direction: column;
+        gap: 0;
+        margin-top: 50px;
+    }
+   
+}
+@media screen and (max-width: 950px) {
+    .pop-form-wrap {
+        flex-direction: column;
+        gap: 0;
+        margin-top: 50px;
+    }
+}
+
 .tag {
     font-size: 18px;
-
+    
 }
 
 .tag-home {
@@ -116,12 +178,9 @@ h1 {
     display: flex;
     width: 100%;
     justify-content: flex-end;
-    gap: 10px;
 }
 
 .btn-wrap-bg {
-    display: flex;
-    gap: 10px;
     border-radius: 17px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
@@ -153,19 +212,7 @@ h1 {
 }
 
 
-.input {
-    border-radius: 17px;
-    font-size: 16px;
-    padding: 10px;
-    padding-left: 14px;
-    padding-top: 6px;
-    width: 270px;
-    margin-bottom: 10px;
-}
 
-.textarea {
-    width: 510px;
-}
 
 .footer {
     font-family: 'Miriam Libre';
@@ -189,3 +236,5 @@ gap: 14px
 .copyright {
     font-size: 12px;
 }
+
+

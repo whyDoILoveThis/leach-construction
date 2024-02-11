@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //icons
 import iconShower from "../assets/icons/icon--shower.jpg";

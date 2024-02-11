@@ -1,4 +1,8 @@
+import BtnGroup from "./BtnGroup";
 const Hero = () => {
+  const contact = true;
+  const customerService = false;
+  const quote = true;
   return (
     <section className="w-full bg-cyan-600 flex justify-between items-center">
       <img src="../src/assets/hero-home.jpg" alt="" />
@@ -11,12 +15,11 @@ const Hero = () => {
           interests and make their concerns the basis of our business.
         </p>
         <div className="btn-wrap mt-8">
-          <button className="btn text-btn-primary border-btn-primary">
-            Contact
-          </button>
-          <button className="btn text-btn-primary border-btn-primary">
-            Get a Quote
-          </button>
+          <BtnGroup
+            contact={contact}
+            customerSevice={customerService}
+            quote={quote}
+          />
         </div>
       </div>
     </section>

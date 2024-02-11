@@ -49,6 +49,7 @@ const HomeSendEmail = () => {
       .then((data) => console.log(data))
       .catch((error) => console.error("Error:", error));
     setIsSending(false);
+    setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
   return (
@@ -62,7 +63,7 @@ const HomeSendEmail = () => {
         </div>
         {/** Form */}
         <form onSubmit={handleSubmit}>
-          <div className="flex w-full mt-10 items-center gap-6">
+          <div className="flex form-wrap w-full mt-10 items-center gap-6">
             <div className="flex flex-col pb-20">
               <label className="pl-4" htmlFor="input">
                 Name
@@ -96,18 +97,20 @@ const HomeSendEmail = () => {
               />
             </div>
             <div className="relative pb-20">
-              <label className="pl-4" htmlFor="input">
-                Message
-              </label>
-              <textarea
-                className="bg-bg-box input textarea"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                id=""
-                cols="30"
-                rows="10"
-              ></textarea>
+              <div className="flex flex-col mb-3">
+                <label className="pl-4" htmlFor="input">
+                  Message
+                </label>
+                <textarea
+                  className="bg-bg-box input textarea"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  id=""
+                  cols="30"
+                  rows="10"
+                ></textarea>
+              </div>
               <button
                 type="submit"
                 className="btn absolute right-4 bottom-0 mb-10 text-btn-primary border-btn-primary"

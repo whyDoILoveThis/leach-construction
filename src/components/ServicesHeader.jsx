@@ -1,4 +1,9 @@
+import BtnGroup from "./BtnGroup";
+
 const ServicesHeader = () => {
+  const contact = false;
+  const customerService = true;
+  const quote = true;
   return (
     <div className="pt-24 flex flex-col items-center">
       <h2 className="section-title">Our Services</h2>
@@ -13,12 +18,13 @@ const ServicesHeader = () => {
       </div>
       <div className="btn-wrap">
         <div className=" btn-wrap-bg bg-bg-box mx-8 mb-10 p-4 pb-0">
-          <button className="btn btn-bg text-btn-primary border-btn-primary">
-            Contact
-          </button>
-          <button className="btn btn-bg text-btn-primary border-btn-primary">
-            Get a Quote
-          </button>
+          <div className="mb-4">
+            <BtnGroup
+              contact={contact}
+              customerSevice={customerService}
+              quote={quote}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ let emailAttempts = 0;
 const maxAttempts = 3;
 
 // Define window duration (in milliseconds)
-const windowDuration = 30 * 60 * 1000; // 30 minutes
+const windowDuration = .3 * 60 * 1000; // 30 minutes
 
 // Function to calculate remaining time
 const calculateRemainingTime = () => {
@@ -45,7 +45,7 @@ app.use(cors());
 // Route to send email
 app.post('/server', async (req, res) => {
     try {
-        const { name, email, phone, message } = req.body;
+        const {type, name, email, phone, message } = req.body;
 
         // Check if sending email is allowed based on remaining time
         const remainingTime = calculateRemainingTime();
@@ -64,12 +64,20 @@ app.post('/server', async (req, res) => {
 
         // Update last attempt time
         lastAttemptTime = Date.now();
+        let newType = ''
+        if(type === '' || type === undefined){
+            newType = 'New Message'
+        }else {
+            newType = type;
+        }
 
         // Construct email message
         const msg = {
             to: 'iannsmif@gmail.com',
             from: 'iannsmif@gmail.com',
-            subject: "New Message",
+            subject: `${newType === 'New Message' ? `📨 ${name}` :
+             newType === 'Customer Service' ? `👷‍♂️ ${name}` :
+              `💰💲 ${name}` }`,
             text: 'Someone sent you a message.',
             html: `<html lang="en">
             <head>
@@ -107,7 +115,10 @@ app.post('/server', async (req, res) => {
             </head>
             <body>
                 <div class="container">
-                    <h1>New Message</h1>
+                    <h1>${newType === 'New Message' ? newType :
+                     newType === 'Customer Service' ? newType :
+                      `${newType} Job Available 💵` }
+                    </h1>
                     <div class="message">
                         <p><strong>Name:</strong> ${name}</p>
                         <p><strong>Email:</strong> ${email}</p>
