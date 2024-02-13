@@ -15,7 +15,7 @@ let emailAttempts = 0;
 
 
 // Define maximum number of attempts allowed
-const maxAttempts = 3;
+const maxAttempts = -1;
 
 // Define window duration (in milliseconds)
 const windowDuration = .3 * 60 * 1000; // 30 minutes
@@ -53,8 +53,14 @@ app.post('/server', async (req, res) => {
             const hours = Math.floor(remainingTime / (60 * 60 * 1000));
             const minutes = Math.floor((remainingTime % (60 * 60 * 1000)) / (60 * 1000));
             const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
-            return res.status(429).send(`You have reached the maximum email limit. Please try again in ${hours}h ${minutes}m ${seconds}s.`);
-        }
+            return res.status(429).json({
+                message: `You have reached the maximum email limit. Please try again in ${hours}h ${minutes}m ${seconds}s.`,
+                remainingTime: {
+                    hours: hours,
+                    minutes: minutes,
+                    seconds: seconds
+                }
+            });        }
 
         // Update email attempts counter
         if(emailAttempts <= maxAttempts)

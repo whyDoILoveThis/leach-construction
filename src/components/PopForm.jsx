@@ -1,10 +1,31 @@
 import { useState, useEffect } from "react";
+import { z } from "zod";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
 import PropTypes from "prop-types";
 import iconClose from "../assets/icons/icon--close.png";
 import JobTypes from "./JobTypes";
+import PopModal from "./PopModal";
 
-// Initialize an agent at application startup.
+// Define Zod schema for form data validation
+const validateFormData = (formData, showContactForm) => {
+  console.log(showContactForm, "contact");
+  const formDataSchema = z.object({
+    service: z.string().optional(),
+    type: showContactForm
+      ? z.string().optional()
+      : z.string().min(1, { message: "Type is required" }),
+
+    name: z.string().min(1, { message: "Name is required" }),
+    email: z
+      .string()
+      .email("Invalid email address")
+      .min(1, { message: "Email is required" }),
+    phone: z.string().min(1, { message: "Phone is required" }),
+    message: z.string().min(1, { message: "Message is required" }),
+  });
+
+  return formDataSchema.parse(formData);
+};
 
 const PopForm = ({
   openForm,
@@ -13,13 +34,6 @@ const PopForm = ({
   showContactForm,
   showQuoteForm,
 }) => {
-  PopForm.propTypes = {
-    openForm: PropTypes.bool.isRequired,
-    setOpenForm: PropTypes.func.isRequired,
-    showCustomerService: PropTypes.bool.isRequired,
-    showContactForm: PropTypes.bool.isRequired,
-    showQuoteForm: PropTypes.bool.isRequired,
-  };
   const [formData, setFormData] = useState({
     service: "",
     type: "",
@@ -28,17 +42,15 @@ const PopForm = ({
     phone: "",
     message: "",
   });
+  const [errors, setErrors] = useState({});
   const [isSending, setIsSending] = useState(false);
+  const [responseGood, setResponseGood] = useState(false);
+  const [responseFailure, setResponseFailure] = useState(false);
+  const [TooManyRequests, setTooManyRequests] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    showCustomerService
-      ? setFormData({
-          ...formData,
-          service: `${formData.type} Customer Service`,
-        })
-      : null;
-  }, [showCustomerService, formData]);
-
+  // Initialize an agent at application startup.
   useEffect(() => {
     const generateFingerprint = async () => {
       const fpPromise = FingerprintJS.load();
@@ -57,6 +69,19 @@ const PopForm = ({
     generateFingerprint();
   }, []);
 
+  useEffect(() => {
+    showCustomerService
+      ? setFormData({
+          ...formData,
+          service: `${formData.type} Customer Service`,
+        })
+      : null;
+  }, []);
+
+  if (TooManyRequests && isSending) {
+    setIsSending(false);
+  }
+
   const handleChange = async (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -65,26 +90,115 @@ const PopForm = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSending(true);
+    setSubmitted(true);
 
-    await fetch("http://localhost:8000/server", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData), // Convert form data to JSON
-    })
-      .then((response) => response.text())
-      .then((data) => console.log(data))
-      .catch((error) => console.error("Error:", error));
-    setIsSending(false);
-    setFormData({ type: "", name: "", email: "", phone: "", message: "" });
+    try {
+      // Validate form data against schema
+      validateFormData(formData, showContactForm);
+
+      // If validation passes, submit the form
+      setIsSending(true);
+      setErrors({});
+
+      const response = await fetch("http://localhost:8000/server", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setResponseGood(true);
+        setResponseFailure(false);
+        const responseData = await response.json();
+        if (responseData.remainingTime) {
+          setRemainingTime(responseData.remainingTime);
+        }
+      } else if (response.status === 429) {
+        setTooManyRequests(true);
+        const responseData = await response.json();
+        if (responseData.remainingTime) {
+          setRemainingTime(responseData.remainingTime);
+        }
+      } else if (response.status === 500) {
+        setResponseGood(false);
+        setResponseFailure(true);
+      } else {
+        setResponseGood(false);
+        setResponseFailure(false);
+        setTooManyRequests(false);
+      }
+    } catch (error) {
+      console.error("Form validation error:", error.errors);
+      setErrors(error.formErrors.fieldErrors);
+    } finally {
+      setIsSending(false);
+    }
   };
+
+  const handleClose = (e) => {
+    console.log("closing form");
+    setResponseGood(false);
+    setResponseFailure(false);
+    setTooManyRequests(false);
+    setIsSending(false);
+    setErrors({});
+    e.preventDefault();
+    setOpenForm(false);
+    setFormData({
+      type: "",
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
+  };
+
+  console.log(responseGood, "good");
+  console.log(responseFailure, "fail");
+  console.log(TooManyRequests, "2many");
+  console.log(remainingTime, "remaining");
+
+  const time = `${remainingTime && remainingTime.hours}h ${
+    remainingTime && remainingTime.minutes
+  }m ${remainingTime && remainingTime.seconds}s`;
 
   return (
     <>
       {" "}
       {openForm && (
         <div className="pop-form overflow-auto fixed left-0 top-0 w-screen h-screen bg-bg-box z-50">
+          {TooManyRequests ? (
+            <PopModal
+              visibility={TooManyRequests}
+              close={handleClose}
+              color="yellow"
+              title="TOO MANY EMAILS"
+              lgText="Sorry, you have sent too many emails"
+              smText={`Please wait ${time} and try again.`}
+            />
+          ) : responseFailure ? (
+            <PopModal
+              visibility={responseFailure}
+              close={handleClose}
+              color="red"
+              title="Server Failure 500"
+              lgText="Sorry, there was a network error."
+              smText="Please, give it another try. If it still doesn't work refresh the page, and try again"
+            />
+          ) : (
+            responseGood && (
+              <PopModal
+                visibility={responseGood}
+                close={handleClose}
+                color="green"
+                title="SUCCESS!"
+                lgText="Your email was sent!"
+                smText="We will call, or message you as soon as possible!"
+              />
+            )
+          )}
           <div className="flex w-full justify-center items-center">
             <div className="pop-bg">
               <>
@@ -132,6 +246,9 @@ const PopForm = ({
                           <label className="pl-4" htmlFor="input">
                             Name
                           </label>
+                          {submitted && errors.name && (
+                            <p className="font-red">Must include a name</p>
+                          )}
                           <input
                             type="text"
                             name="name"
@@ -142,6 +259,9 @@ const PopForm = ({
                           <label className="pl-4" htmlFor="input">
                             Email
                           </label>
+                          {submitted && errors.email && (
+                            <p className="font-red">Must include an email</p>
+                          )}
                           <input
                             type="email"
                             name="email"
@@ -152,6 +272,9 @@ const PopForm = ({
                           <label className="pl-4" htmlFor="input">
                             Phone
                           </label>
+                          {submitted && errors.phone && (
+                            <p className="font-red">Must include a phone</p>
+                          )}
                           <input
                             type="text"
                             name="phone"
@@ -162,6 +285,9 @@ const PopForm = ({
                         </div>
                         {showQuoteForm || showCustomerService ? (
                           <div className="mb-4">
+                            {submitted && errors.type && (
+                              <p className="font-red">Must include a type</p>
+                            )}
                             <JobTypes
                               formDataType={formData.type}
                               handleChange={handleChange}
@@ -174,6 +300,9 @@ const PopForm = ({
                           <label className="pl-4" htmlFor="input">
                             Message
                           </label>
+                          {submitted && errors.message && (
+                            <p className="font-red">Must include a message</p>
+                          )}
                           <textarea
                             className="bg-bg-box input textarea"
                             name="message"
@@ -195,15 +324,7 @@ const PopForm = ({
                       <button
                         className="absolute right-4 top-4"
                         onClick={(e) => {
-                          e.preventDefault();
-                          setOpenForm(false);
-                          setFormData({
-                            type: "",
-                            name: "",
-                            email: "",
-                            phone: "",
-                            message: "",
-                          });
+                          handleClose(e);
                         }}
                       >
                         <img
@@ -223,5 +344,11 @@ const PopForm = ({
     </>
   );
 };
-
+PopForm.propTypes = {
+  openForm: PropTypes.bool.isRequired,
+  setOpenForm: PropTypes.func.isRequired,
+  showCustomerService: PropTypes.bool.isRequired,
+  showContactForm: PropTypes.bool.isRequired,
+  showQuoteForm: PropTypes.bool.isRequired,
+};
 export default PopForm;

@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 
-
+.blurry-bg {
+    backdrop-filter: blur(15px);
+}
 
 @font-face {
     font-family: 'NATS';
@@ -30,6 +32,26 @@ body {
 
 h1 {
     font-size: 42px;
+}
+
+.font-white {
+    color: white;
+}
+
+.font-red {
+     color: rgb(255, 80, 80);
+}
+
+.font-32px {
+    font-size: 32px;
+}
+
+.font-24px {
+    font-size: 24px;
+}
+
+.font-16px {
+    font-size: 16px;
 }
 
 .link:hover {
@@ -95,6 +117,10 @@ h1 {
     width: 400px;
 }
 
+.textarea::placeholder {
+    opacity: .45;
+}
+
 .pop-form {
     font-size: 16px;
 }
@@ -109,6 +135,19 @@ h1 {
     padding: 0 3rem;
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.341);
+}
+
+.pop-yellow {
+    background-color: rgba(255, 255, 0, 0.156);
+    color: rgb(217, 217, 122);
+    border-color: rgba(209, 209, 60, 0.658);
+}.pop-red {
+    background-color: rgba(255, 0, 0, 0.195);
+    color: rgb(255, 159, 159);
+}.pop-green {
+    background-color: #2c591c65;
+    color: #a4ffa4;
+    border-color: #6BFA5F;
 }
 
 @media screen and (max-width: 500px) {
@@ -209,6 +248,15 @@ h1 {
 .btn:active {
     background-color: #FFD600;
     color: black;
+}
+
+.btn-grn:hover {
+    background-color: rgba(98, 255, 0, 0.164);
+    color: rgb(89, 255, 0);
+}
+.btn-grn:active {
+    background-color: #80ff5d5a;
+    color: rgba(0, 0, 0, 0.378);
 }
 
 .dropdown-selector {

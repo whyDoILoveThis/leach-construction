@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./Pages/Home";
 import Services from "./Pages/Services";
+import Bathrooms from "./Pages/Bathrooms";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 
@@ -17,6 +18,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/bathrooms" element={<Bathrooms />} />
+
           <Route
             path="/about"
             element={<About dropped={dropped} setDropped={setDropped} />}

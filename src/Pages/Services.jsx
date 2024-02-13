@@ -7,7 +7,10 @@ const Services = () => {
   return (
     <div className="w-full">
       <NavBar />
-      <ServicesHeader />
+      <ServicesHeader
+        title="Our Services"
+        text="We offer many services including custom bathrooms, floor & tile installations, porch/deck builds, metal roofs, whole house remodels, additions, and raised foundation leveling. You name it, we can do it. There is no job too big or small. Contact us to get more information and to set up a free estimate."
+      />
       <ServicesList />
       <Footer />
     </div>

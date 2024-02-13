@@ -1,20 +1,19 @@
 import BtnGroup from "./BtnGroup";
+import PropTypes from "prop-types";
 
-const ServicesHeader = () => {
-  const contact = false;
-  const customerService = true;
+const ServicesHeader = ({ title, text }) => {
+  ServicesHeader.propTypes = {
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  };
+  const contact = true;
+  const customerService = false;
   const quote = true;
   return (
     <div className="pt-24 flex flex-col items-center">
-      <h2 className="section-title">Our Services</h2>
+      <h2 className="section-title">{title}</h2>
       <div className="my-text-box bg-bg-box p-6 mx-8 footer">
-        <p>
-          We offer many services including custom bathrooms, floor & tile
-          installations, porch/deck builds, metal roofs, whole house remodels,
-          additions, and raised foundation leveling. You name it, we can do it.
-          There is no job too big or small. Contact us to get more information
-          and to set up a free estimate.
-        </p>
+        <p>{text}</p>
       </div>
       <div className="btn-wrap">
         <div className=" btn-wrap-bg bg-bg-box mx-8 mb-10 p-4 pb-0">
