@@ -85,6 +85,15 @@ const PopForm = ({
   const handleChange = async (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    // Validate the changed field
+    try {
+      validateFormData({ ...formData, [name]: value });
+      // If validation passes, clear the error message for the field
+      setErrors({ ...errors, [name]: undefined });
+    } catch (error) {
+      // If validation fails, set the error message for the field
+      setErrors({ ...errors, [name]: error.formErrors.fieldErrors[name] });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -260,7 +269,12 @@ const PopForm = ({
                             Email
                           </label>
                           {submitted && errors.email && (
-                            <p className="font-red">Must include an email</p>
+                            <p className="font-red">
+                              {" "}
+                              {errors.email.map((err, index) => (
+                                <p key={index}>{err}</p>
+                              ))}
+                            </p>
                           )}
                           <input
                             type="email"

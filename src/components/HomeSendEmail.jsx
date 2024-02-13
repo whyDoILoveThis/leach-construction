@@ -259,14 +259,6 @@ const HomeSendEmail = () => {
                 {isSending ? "Sending..." : "Send"}
               </button>
             </div>
-            <button
-              className="absolute right-4 top-4"
-              onClick={(e) => {
-                handleClose(e);
-              }}
-            >
-              <img src={iconClose} className="w-14 h-14" alt="close" />
-            </button>
           </div>
         </form>
         <div className="h-20"></div>

@@ -11,7 +11,7 @@ const DropDown = ({ showContent, heading, icon, text }) => {
   const [display, setDisplay] = useState(showContent);
 
   return (
-    <div className=" mb-60 flex flex-col justify-center items-center">
+    <div className=" mb-10 flex flex-col justify-center items-center">
       <div
         onClick={() => setDisplay(!display)}
         className={` ${
