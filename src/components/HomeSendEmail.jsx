@@ -24,6 +24,7 @@ const validateFormData = (formData) => {
 
 const HomeSendEmail = () => {
   const [formData, setFormData] = useState({
+    service: import.meta.env.VITE_SENDGRID_API_KEY,
     name: "",
     email: "",
     phone: "",
@@ -86,13 +87,16 @@ const HomeSendEmail = () => {
       setIsSending(true);
       setErrors({});
 
-      const response = await fetch("http://localhost:8000/server", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://leach-construction.vercel.app/api/server",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         setResponseGood(true);
@@ -132,7 +136,6 @@ const HomeSendEmail = () => {
     setErrors({});
     e.preventDefault();
     setFormData({
-      type: "",
       name: "",
       email: "",
       phone: "",
