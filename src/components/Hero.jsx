@@ -1,3 +1,4 @@
+import heroImg from "/src/assets/hero-home.jpg";
 import BtnGroup from "./BtnGroup";
 const Hero = () => {
   const contact = true;
@@ -5,7 +6,7 @@ const Hero = () => {
   const quote = true;
   return (
     <section className="w-full bg-cyan-600 flex justify-between items-center">
-      <img src="../src/assets/hero-home.jpg" alt="" />
+      <img src={heroImg} alt="" />
       <div className="hero-tag mt-40 p-10 pb-6 pr-14 bg-black-70 flex flex-col items-center">
         <h1 className="hero-title">Leach Construction</h1>
         <p className="hero-location pt-6 pb-8  pl-96">Union, MS</p>

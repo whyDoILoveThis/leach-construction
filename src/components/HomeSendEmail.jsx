@@ -1,25 +1,8 @@
 import { useState, useEffect } from "react";
-import { z } from "zod";
+// import { z } from "zod";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
-import iconClose from "../assets/icons/icon--close.png";
 import PopModal from "./PopModal";
-
-// Define Zod schema for form data validation
-const validateFormData = (formData) => {
-  const formDataSchema = z.object({
-    service: z.string().optional(),
-
-    name: z.string().min(1, { message: "Name is required" }),
-    email: z
-      .string()
-      .min(1, { message: "Must include email" })
-      .email("Invalid email address"),
-    phone: z.string().min(1, { message: "Phone is required" }),
-    message: z.string().min(10, { message: "Must be atleast 10 characters" }),
-  });
-
-  return formDataSchema.parse(formData);
-};
+import { Client, Functions } from "appwrite";
 
 // Initialize an agent at application startup.
 
@@ -38,6 +21,23 @@ const HomeSendEmail = () => {
   const [remainingTime, setRemainingTime] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
+  // // Define Zod schema for form data validation
+  // const validateFormData = (formData) => {
+  //   const formDataSchema = z.object({
+  //     service: z.string().optional(),
+
+  //     name: z.string().min(1, { message: "Name is required" }),
+  //     email: z
+  //       .string()
+  //       .min(1, { message: "Must include email" })
+  //       .email("Invalid email address"),
+  //     phone: z.string().min(1, { message: "Phone is required" }),
+  //     message: z.string().min(10, { message: "Must be atleast 10 characters" }),
+  //   });
+
+  //   return formDataSchema.parse(formData);
+  // };
+
   useEffect(() => {
     const generateFingerprint = async () => {
       const fpPromise = FingerprintJS.load();
@@ -47,10 +47,10 @@ const HomeSendEmail = () => {
       const result = await fp.get();
       console.log(result.visitorId);
 
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        fingerprint: result.visitorId,
-      }));
+      //   setFormData((prevFormData) => ({
+      //     ...prevFormData,
+      //     fingerprint: result.visitorId,
+      //   }));
     };
 
     generateFingerprint();
@@ -63,38 +63,47 @@ const HomeSendEmail = () => {
   const handleChange = async (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    // Validate the changed field
-    try {
-      validateFormData({ ...formData, [name]: value });
-      // If validation passes, clear the error message for the field
-      setErrors({ ...errors, [name]: undefined });
-    } catch (error) {
-      // If validation fails, set the error message for the field
-      setErrors({ ...errors, [name]: error.formErrors.fieldErrors[name] });
-    }
+    // // Validate the changed field
+    // try {
+    //   validateFormData({ ...formData, [name]: value });
+    //   // If validation passes, clear the error message for the field
+    //   setErrors({ ...errors, [name]: undefined });
+    // } catch (error) {
+    //   // If validation fails, set the error message for the field
+    //   setErrors({ ...errors });
+    // }
   };
 
   const handleSubmit = async (e) => {
+    console.log("handling submit");
     e.preventDefault();
     setIsSending(true);
     setSubmitted(true);
 
+    console.log("making new client");
+    const client = new Client()
+      .setEndpoint("https://65cd084d627d034d4321.appwrite.global")
+      .setProject("65cd04cdb5b8c2540e5a");
+    console.log("created client");
+
+    const functions = new Functions(client);
+
     try {
-      // Validate form data against schema
-      validateFormData(formData);
+      // // Validate form data against schema
+      // validateFormData(formData);
 
-      // If validation passes, submit the form
-      setIsSending(true);
-      setErrors({});
-
-      const response = await fetch("http://localhost:8000/server", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
+      // // If validation passes, submit the form
+      // setIsSending(true);
+      // setErrors({});
+      const response = await functions.createExecution(
+        "65cd084ce054433e9f44",
+        JSON.stringify({ formData }),
+        false,
+        "/",
+        "POST",
+        { "Content-Type": "application/json" }
+      );
+      console.log("requested");
       if (response.ok) {
         setResponseGood(true);
         setResponseFailure(false);
@@ -116,9 +125,9 @@ const HomeSendEmail = () => {
         setResponseFailure(false);
         setTooManyRequests(false);
       }
-    } catch (error) {
-      console.error("Form validation error:", error.errors);
-      setErrors(error.formErrors.fieldErrors);
+    } catch (err) {
+      // console.error("Form validation error:", error);
+      console.error(err.message);
     } finally {
       setIsSending(false);
     }

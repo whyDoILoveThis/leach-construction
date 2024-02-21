@@ -1,13 +1,17 @@
-import express from 'express';
 import sgMail from '@sendgrid/mail';
-import cron from 'node-cron';
-import cors from 'cors';
+import appwrite from 'appwrite';
 
+// Initialize Appwrite SDK
+const client = new appwrite.Client();
+client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Replace with your Appwrite endpoint
+    .setProject('65cd04cdb5b8c2540e5a') // Replace with your Appwrite project ID
+
+console.log('running');
 // Setup SendGrid API Key
 sgMail.setApiKey('SG.ssCMRHGWQ-aWw9kYwYgGdQ.PVWRkHk8SyHVUNZnmBCCQaT2ao3TNQHy0Zm9raS63LQ');
 
-// Initialize Express app
-const app = express();
+
 
 // Store last attempt time globally
 let lastAttemptTime = null;
@@ -32,18 +36,11 @@ const calculateRemainingTime = () => {
     }
 };
 
-// Schedule task to update remaining time periodically
-cron.schedule('*/1 * * * *', () => { // Runs every minute
-    const remainingTime = calculateRemainingTime();
-    console.log(`Remaining time: ${remainingTime} milliseconds`);
-});
 
-// Middleware to parse JSON bodies
-app.use(express.json());
-app.use(cors());
 
 // Route to send email
-app.post('/server', async (req, res) => {
+// Route to send email
+const server = async (req, res) => {
     try {
         const {service, type, name, email, phone, message } = req.body;
 
@@ -146,10 +143,8 @@ app.post('/server', async (req, res) => {
         console.error('Error sending email:', error);
         res.status(500).send('An error occurred while sending the email.');
     }
-});
+};
 
-// Start the server
-const PORT = 8000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+
+
+export default server;
