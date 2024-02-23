@@ -150,7 +150,7 @@ const HomeSendEmail = () => {
       <div className="w-full flex flex-col items-center justify-center mt-28">
         <div className="home-send-email w-fit p-28 py-0 pb-6 bg-bg-box flex flex-col justify-center items-center text-center">
           <h2 className="section-title">
-            Send us an email 📧 <br />
+            📧 <br /> Send us an email
           </h2>
           <p className="font-bold">Send us an email right from here.</p>
           <p>No need to navigate elsewhere.</p>

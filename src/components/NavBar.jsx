@@ -50,7 +50,7 @@ const NavBar = () => {
         </ul>
       </div>
       {isMobileMenuOpen && (
-        <ul className="mobile-menu-items bg-black-79">
+        <ul className="mobile-menu-items bg-black-79 xs:hidden">
           <li>
             <Link to={"/"} className="link" onClick={toggleMobileMenu}>
               Home

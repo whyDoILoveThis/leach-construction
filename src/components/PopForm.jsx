@@ -185,7 +185,7 @@ const PopForm = ({
     <>
       {" "}
       {openForm && (
-        <div className="pop-form overflow-auto fixed left-0 top-0 right-0  bottom-0 w-screen h-screen  bg-bg-box z-50">
+        <div className="pop-form overflow-auto fixed left-0 top-0 right-0  bottom-0 w-screen h-full  bg-bg-box z-50">
           {TooManyRequests ? (
             <PopModal
               visibility={TooManyRequests}

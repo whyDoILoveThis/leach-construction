@@ -16,7 +16,7 @@ const PopModal = ({ visibility, close, color, title, lgText, smText }) => {
   return (
     <>
       {isVisible && (
-        <div className="blurry-bg overflow-auto fixed flex items-center left-0 top-0 w-screen h-screen bg-bg-box z-50">
+        <div className="blurry-bg px-4 overflow-auto fixed flex items-center left-0 top-0 w-screen h-screen bg-bg-box z-50">
           <div className="flex w-full justify-center items-center">
             <div
               className={`pop-bg ${
@@ -30,9 +30,9 @@ const PopModal = ({ visibility, close, color, title, lgText, smText }) => {
               }`}
             >
               <>
-                {/** Header */}
-                <div className="w-full font-sans flex flex-col items-center justify-center my-10">
-                  <div className="rounded-3xl m-10 w-fit p-28 py-0 pb-6 bg-bg-box flex flex-col justify-center items-center text-center">
+                {/** TEXT */}
+                <div className="w-full font-sans flex flex-col items-center justify-center ">
+                  <div className="xxs:p-4 rounded-3xl m-10 w-fit xs:p-12 py-0 pb-6 bg-bg-box flex flex-col justify-center items-center text-center ">
                     <h2 className="font-32px font-bold">{title}</h2>
                     <p className="font-24px">{lgText}</p>
                     <p className="font-16px font-white">{smText}</p>
@@ -43,9 +43,9 @@ const PopModal = ({ visibility, close, color, title, lgText, smText }) => {
                       setVisiblilty(false);
                       close(e);
                     }}
-                    className="absolute right-4 top-4"
+                    className="absolute right-2 top-2"
                   >
-                    <img src={iconClose} className="w-14 h-14" alt="close" />
+                    <img src={iconClose} className="w-10 h-10" alt="close" />
                   </button>
                 </div>
               </>

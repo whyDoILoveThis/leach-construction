@@ -8,7 +8,9 @@ const HomeReviews = () => {
       <div className="flex gap-10">
         <Review />
         <Review />
-        <Review />
+        <div className="xxs:hidden xs:inline">
+          <Review />
+        </div>
       </div>
       <button className="btn mt-14 text-btn-primary border-btn-primary">
         All Reviews
