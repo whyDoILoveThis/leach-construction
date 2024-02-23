@@ -13,13 +13,17 @@ const PopModal = ({ visibility, close, color, title, lgText, smText }) => {
   };
   const [isVisible, setVisiblilty] = useState(visibility);
 
+  if (isVisible) {
+    document.body.style.overflow = "hidden";
+  }
+
   return (
     <>
       {isVisible && (
-        <div className="blurry-bg px-4 overflow-auto fixed flex items-center left-0 top-0 w-screen h-screen bg-bg-box z-50">
+        <div className="blurry-bg popper px-4 overflow-auto fixed flex items-center left-0 top-0 w-screen h-full bg-bg-box z-50">
           <div className="flex w-full justify-center items-center">
             <div
-              className={`pop-bg ${
+              className={`pop-bg m-10 ${
                 color === "yellow"
                   ? "pop-yellow"
                   : color === "red"
@@ -42,10 +46,16 @@ const PopModal = ({ visibility, close, color, title, lgText, smText }) => {
                     onClick={(e) => {
                       setVisiblilty(false);
                       close(e);
+                      document.body.style.overflowY = "scroll";
                     }}
                     className="absolute right-2 top-2"
                   >
-                    <img src={iconClose} className="w-10 h-10" alt="close" />
+                    <img
+                      draggable={false}
+                      src={iconClose}
+                      className="w-10 h-10"
+                      alt="close"
+                    />
                   </button>
                 </div>
               </>

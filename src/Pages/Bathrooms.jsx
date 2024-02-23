@@ -2,7 +2,12 @@ import NavBar from "../components/NavBar";
 import ServiceHero from "../components/ServiceHero";
 import Footer from "../components/Footer";
 import ServicesHeader from "../components/ServicesHeader";
+import { useEffect } from "react";
+
 const Bathrooms = () => {
+  useEffect(() => {
+    document.body.style.overflowY = "scroll";
+  }, []);
   return (
     <div>
       <NavBar />

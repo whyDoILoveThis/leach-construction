@@ -10,6 +10,7 @@ function App() {
   const [dropped, setDropped] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.body.style.overflowy = "scroll";
   }, []);
 
   return (

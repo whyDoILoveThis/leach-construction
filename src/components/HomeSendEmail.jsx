@@ -87,13 +87,16 @@ const HomeSendEmail = () => {
       setIsSending(true);
       setErrors({});
 
-      const response = await fetch("http://localhost:8000/server", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://leach-construction.vercel.app/api/server",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         setResponseGood(true);

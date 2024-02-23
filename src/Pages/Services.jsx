@@ -2,8 +2,12 @@ import NavBar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
 import ServicesHeader from "../components/ServicesHeader.jsx";
 import ServicesList from "../components/ServicesList.jsx";
+import { useEffect } from "react";
 
 const Services = () => {
+  useEffect(() => {
+    document.body.style.overflowY = "scroll";
+  }, []);
   return (
     <div className="w-full">
       <NavBar />

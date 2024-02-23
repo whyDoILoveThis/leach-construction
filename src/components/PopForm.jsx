@@ -35,7 +35,7 @@ const PopForm = ({
   showQuoteForm,
 }) => {
   const [formData, setFormData] = useState({
-    service: "",
+    service: import.meta.env.VITE_SENDGRID_API_KEY,
     type: "",
     name: "",
     email: "",
@@ -114,7 +114,7 @@ const PopForm = ({
       setErrors({});
 
       const response = await fetch(
-        "https://leach-construction.web.app/server",
+        "https://leach-construction.vercel.app/api/server",
         {
           method: "POST",
           headers: {
@@ -155,7 +155,7 @@ const PopForm = ({
 
   const handleClose = (e) => {
     console.log("closing form");
-    document.body.style.overflow = "scroll";
+    document.body.style.overflowY = "scroll";
     setResponseGood(false);
     setResponseFailure(false);
     setTooManyRequests(false);
@@ -366,6 +366,7 @@ const PopForm = ({
                         }}
                       >
                         <img
+                          draggable={false}
                           src={iconClose}
                           className="w-14 h-14"
                           alt="close"

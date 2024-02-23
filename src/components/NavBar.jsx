@@ -52,22 +52,38 @@ const NavBar = () => {
       {isMobileMenuOpen && (
         <ul className="mobile-menu-items bg-black-79 xs:hidden">
           <li>
-            <Link to={"/"} className="link" onClick={toggleMobileMenu}>
+            <Link
+              to={"/"}
+              className="m-link hover:bg-white-transparent rounded-xl hover:px-3"
+              onClick={toggleMobileMenu}
+            >
               Home
             </Link>
           </li>
           <li>
-            <Link to={"/services"} className="link" onClick={toggleMobileMenu}>
+            <Link
+              to={"/services"}
+              className="m-link hover:bg-white-transparent rounded-xl hover:px-3"
+              onClick={toggleMobileMenu}
+            >
               Services
             </Link>
           </li>
           <li>
-            <Link to={"/about"} className="link" onClick={toggleMobileMenu}>
+            <Link
+              to={"/about"}
+              className="m-link hover:bg-white-transparent rounded-xl hover:px-3"
+              onClick={toggleMobileMenu}
+            >
               About
             </Link>
           </li>
           <li>
-            <Link to={"/contact"} className="link" onClick={toggleMobileMenu}>
+            <Link
+              to={"/contact"}
+              className="m-link hover:bg-white-transparent rounded-xl hover:px-3"
+              onClick={toggleMobileMenu}
+            >
               Contact Info
             </Link>
           </li>

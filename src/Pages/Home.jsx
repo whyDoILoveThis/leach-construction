@@ -4,8 +4,12 @@ import HomeServices from "../components/HomeServices.jsx";
 import HomeReviews from "../components/HomeReviews.jsx";
 import HomeSendEmail from "../components/HomeSendEmail.jsx";
 import Footer from "../components/Footer.jsx";
+import { useEffect } from "react";
 
 const Home = () => {
+  useEffect(() => {
+    document.body.style.overflowY = "scroll";
+  }, []);
   return (
     <div className="w-full ">
       <NavBar />

@@ -4,12 +4,12 @@ import Footer from "../components/Footer.jsx";
 import DropDown from "../components/DropDown.jsx";
 import chevron from "../assets/icons/chevron.png";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
 const About = ({ dropped, setDropped }) => {
-  About.propTypes = {
-    dropped: PropTypes.bool.isRequired,
-    setDropped: PropTypes.func.isRequired,
-  };
+  useEffect(() => {
+    document.body.style.overflowY = "scroll";
+  }, []);
 
   setDropped(dropped);
 
@@ -49,3 +49,8 @@ const About = ({ dropped, setDropped }) => {
 };
 
 export default About;
+
+About.propTypes = {
+  dropped: PropTypes.bool.isRequired,
+  setDropped: PropTypes.func.isRequired,
+};

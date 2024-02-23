@@ -9,6 +9,7 @@ export default {
       colors: {
         'black-79': '#000000cc',
         'black-70': '#000000b3',
+        'white-transparent': '#ffffff1b',
         'bg-primary': '#1e1e1e',
         'btn-primary': '#FFD600',
         'bg-box': '#00000082'
