@@ -1,6 +1,10 @@
+import express from 'express';
 import sgMail from '@sendgrid/mail';
 import cron from 'node-cron';
+import cors from 'cors';
 
+// Initialize Express app
+const app = express();
 
 // Store last attempt time globally
 let lastAttemptTime = null;
@@ -31,13 +35,14 @@ cron.schedule('*/1 * * * *', () => { // Runs every minute
     console.log(`Remaining time: ${remainingTime} milliseconds`);
 });
 
-console.log('setup ready');
+// Middleware to parse JSON bodies
+app.use(express.json());
+app.use(cors());
 
-export default async function handler(req, res) {
-    if (req.method === 'POST') {
+// Route to send email
+app.post('/server', async (req, res) => {
     try {
         const {service, type, name, email, phone, message } = req.body;
-
         
         const api_key = service;
         
@@ -145,6 +150,10 @@ export default async function handler(req, res) {
         console.error('Error sending email:', error);
         res.status(500).send('An error occurred while sending the email.');
     }
-}
-}
+});
 
+// Start the server
+const PORT = 8000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

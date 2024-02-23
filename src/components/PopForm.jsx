@@ -50,6 +50,10 @@ const PopForm = ({
   const [remainingTime, setRemainingTime] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
+  if (openForm) {
+    document.body.style.overflow = "hidden";
+  }
+
   // Initialize an agent at application startup.
   useEffect(() => {
     const generateFingerprint = async () => {
@@ -151,6 +155,7 @@ const PopForm = ({
 
   const handleClose = (e) => {
     console.log("closing form");
+    document.body.style.overflow = "scroll";
     setResponseGood(false);
     setResponseFailure(false);
     setTooManyRequests(false);
@@ -180,7 +185,7 @@ const PopForm = ({
     <>
       {" "}
       {openForm && (
-        <div className="pop-form overflow-auto fixed left-0 top-0 w-screen h-screen bg-bg-box z-50">
+        <div className="pop-form overflow-auto fixed left-0 top-0 right-0  bottom-0 w-screen h-screen  bg-bg-box z-50">
           {TooManyRequests ? (
             <PopModal
               visibility={TooManyRequests}
@@ -218,13 +223,25 @@ const PopForm = ({
                 <div className="w-full font-sans flex flex-col items-center justify-center mt-10">
                   <div className="home-send-email w-fit p-28 py-0 pb-6 bg-bg-box flex flex-col justify-center items-center text-center">
                     <h2 className="section-title">
-                      {showQuoteForm && "💰 Get a quote"}{" "}
-                      {showContactForm && "👋 Contact us about anything"}
-                      {showCustomerService && "👷‍♂️ Customer Service Request"}
+                      {showQuoteForm && (
+                        <>
+                          🤷‍♂️💰 <br /> Get a quote
+                        </>
+                      )}{" "}
+                      {showContactForm && (
+                        <>
+                          👋 <br /> Contact us about anything
+                        </>
+                      )}
+                      {showCustomerService && (
+                        <>
+                          👷‍♂️ <br /> Customer Service Request
+                        </>
+                      )}
                     </h2>
                     {showQuoteForm && (
                       <>
-                        <p>Know what you need done?</p>
+                        <p className="font-bold">Know what you need done?</p>
                         <p>
                           Tell us as many details as you can, and we&#39;ll send
                           you an estimate!👍{" "}
@@ -233,7 +250,9 @@ const PopForm = ({
                     )}{" "}
                     {showContactForm && (
                       <>
-                        <p>Want to know something about us?</p>
+                        <p className="font-bold">
+                          Want to know something about us?
+                        </p>
                         <p>
                           We are happy to answer any, and all questions you
                           might have. 🧐
@@ -242,7 +261,9 @@ const PopForm = ({
                     )}
                     {showCustomerService && (
                       <>
-                        <p>Need us to revisit for some reason?</p>
+                        <p className="font-bold">
+                          Need us to revisit for some reason?
+                        </p>
                         <p>
                           Tell us exactly what&#39;s going on, and we&#39;ll be
                           glad to help! 👍
