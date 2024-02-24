@@ -1,11 +1,8 @@
 {
-    "version": 2,
-   
-    "routes": [
-      { "src": "/api/server", "dest": "/api/server.js" },
-      { "src": "/services", "dest": "/src/Pages/Services.jsx" }
-
-    ]    
-    
-    
-  }
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/server", "destination": "/api/server.js" },
+    { "source": "/services", "destination": "/src/Pages/Services.jsx" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
