@@ -1,0 +1,9 @@
+.service-hero-fontsz {
+    font-size: 30px;
+}
+
+@media screen and (min-width: 545px) {
+    .service-hero-fontsz {
+        font-size: 38px;
+    }
+}

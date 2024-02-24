@@ -10,6 +10,7 @@ import PopModal from "./PopModal";
 const validateFormData = (formData, showContactForm) => {
   console.log(showContactForm, "contact");
   const formDataSchema = z.object({
+    special: z.string().optional(),
     service: z.string().optional(),
     type: showContactForm
       ? z.string().optional()
@@ -35,6 +36,7 @@ const PopForm = ({
   showQuoteForm,
 }) => {
   const [formData, setFormData] = useState({
+    special: "",
     service: import.meta.env.VITE_SENDGRID_API_KEY,
     type: "",
     name: "",
@@ -77,10 +79,11 @@ const PopForm = ({
     showCustomerService
       ? setFormData({
           ...formData,
-          service: `${formData.type} Customer Service`,
+          special: `${formData.type} Customer Service`,
         })
       : null;
-  }, []);
+    console.log(formData.type);
+  }, [formData.type]);
 
   if (TooManyRequests && isSending) {
     setIsSending(false);

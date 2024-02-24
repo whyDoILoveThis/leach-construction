@@ -111,9 +111,18 @@ h1 {
     backdrop-filter: blur(4px);
 }
 
-.logo {
-    font-family: 'Meow Script', cursive;
-    font-size: 42px;
+.open-mobile {
+    max-height: 500px;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+    opacity: 1;
+}
+
+.closed-mobile {
+    transition: max-height 0.042s ease, padding 0.041s ease;
+}
+
+.closed-mobile .m-link {
+   opacity: 0;
 }
 
 .hero-tag {
@@ -214,7 +223,6 @@ h1 {
     background-color: rgba(255, 255, 255, 0.169);
     position: absolute;
     top: 10px;
-    
     border-radius: 17px;
     margin: 1rem;
     padding: 0 1rem;
@@ -465,24 +473,6 @@ padding-left: 15px;
     cursor: pointer;
   }
   
-  
-  /* Mobile menu items */
-  .mobile-menu-items {
-    position: fixed;
-    top: 45px;
-    
-    backdrop-filter: blur(4px);
-    padding: 1rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    border-radius: 0.5rem;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.574);
-  }
-  
   /* Links in mobile menu */
   .mobile-menu-items .link {
     color: #fff;
@@ -495,10 +485,4 @@ padding-left: 15px;
     background-color: rgba(255, 255, 255, 0.1);
   }
   
-  /* Desktop menu */
-  @media (max-width: 767px) {
-    .xs\\:hidden {
-      display: none;
-    }
-  }
 

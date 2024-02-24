@@ -20,17 +20,17 @@ const PopModal = ({ visibility, close, color, title, lgText, smText }) => {
   return (
     <>
       {isVisible && (
-        <div className="blurry-bg popper px-4 overflow-auto fixed flex items-center left-0 top-0 w-screen h-full bg-bg-box z-50">
+        <div className="blurry-bg popper px-4 overflow-auto fixed flex justify-center items-center left-0 top-0 w-screen h-full bg-bg-box z-50">
           <div className="flex w-full justify-center items-center">
             <div
-              className={`pop-bg m-10 ${
+              className={`rounded-3xl relative m-10 ${
                 color === "yellow"
                   ? "pop-yellow"
                   : color === "red"
                   ? "pop-red"
                   : color === "green"
                   ? "pop-green"
-                  : ""
+                  : "pop-bg"
               }`}
             >
               <>

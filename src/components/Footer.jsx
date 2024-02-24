@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import PopModal from "./PopModal";
 import PopForm from "./PopForm";
+import Logo from "../assets/logo.png";
 import chevron from "../assets/icons/chevron.png";
 
 const Footer = () => {
@@ -18,12 +19,40 @@ const Footer = () => {
   const toggleAboutLinks = () => setShowAboutLinks(!showAboutLinks);
   const toggleContactLinks = () => setShowContactLinks(!showContactLinks);
 
+  const serviceLinks = [
+    {
+      title: "Bathrooms",
+      link: "/bathrooms",
+    },
+    {
+      title: "Floors",
+      link: "/floors",
+    },
+    {
+      title: "Porches",
+      link: "/porches",
+    },
+    {
+      title: "Entire Remodels",
+      link: "/remodels",
+    },
+    {
+      title: "Roofing",
+      link: "/roofing",
+    },
+    {
+      title: "Additions",
+      link: "/additions",
+    },
+  ];
+
   return (
     <div className="footer w-full bg-black-79">
       <div className="ml-8 mb-10">
-        <p className="logo">
-          <Link to={"/"}>🛠 Leach</Link>
-        </p>
+        <Link to={"/"}>
+          {" "}
+          <img className="w-56 pt-4" src={Logo} alt="Leach" />{" "}
+        </Link>
       </div>
       <div className="flex xxs:flex-col xs:flex-row xs:justify-evenly">
         <div className="flex flex-col ">
@@ -53,45 +82,19 @@ const Footer = () => {
           </h3>
           {showServicesLinks && (
             <ul className="footer-section-list xxs:inline xxs:ml-14 xs:hidden">
-              <li className="link">
-                <Link to={"/showers"}>Showers</Link>
-              </li>
-              <li className="link">
-                <Link to={"/floors"}>Floors</Link>
-              </li>
-              <li className="link">
-                <Link to={"/porches"}>Porches</Link>
-              </li>
-              <li className="link">
-                <Link to={"remodels"}>Entire Remodels</Link>
-              </li>
-              <li className="link">
-                <Link to={"roofing"}>Roofing</Link>
-              </li>
-              <li className="link">
-                <Link to={"additions"}>Additions</Link>
-              </li>
+              {serviceLinks.map((service, index) => (
+                <li key={index} className="link">
+                  <Link to={service.link}>{service.title}</Link>
+                </li>
+              ))}
             </ul>
           )}
           <ul className="footer-section-list xxs:hidden xs:inline">
-            <li className="link">
-              <Link to={"/showers"}>Showers</Link>
-            </li>
-            <li className="link">
-              <Link to={"/floors"}>Floors</Link>
-            </li>
-            <li className="link">
-              <Link to={"/porches"}>Porches</Link>
-            </li>
-            <li className="link">
-              <Link to={"remodels"}>Entire Remodels</Link>
-            </li>
-            <li className="link">
-              <Link to={"roofing"}>Roofing</Link>
-            </li>
-            <li className="link">
-              <Link to={"additions"}>Additions</Link>
-            </li>
+            {serviceLinks.map((service, index) => (
+              <li key={index} className="link">
+                <Link to={service.link}>{service.title}</Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="flex flex-col">

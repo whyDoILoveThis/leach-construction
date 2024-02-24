@@ -15,45 +15,50 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="nav h-20 bg-black-79 fixed flex items-center justify-between p-4 ">
-        <p className="logo text-white text-xl font-bold">
+      <div className="nav  bg-black-79 fixed flex flex-col justify-center p-4 ">
+        <div className="flex justify-between items-center">
           <Link to={"/"}>
             <img className="w-56 " src={Logo} />
           </Link>
-        </p>
-        <div className="mobile-menu xs:hidden">
-          <button
-            className="hamburger-menu text-white text-2xl"
-            onClick={toggleMobileMenu}
-          >
-            ☰
-          </button>
+          <div className="mobile-menu xs:hidden">
+            <button
+              className="hamburger-menu text-white text-2xl"
+              onClick={toggleMobileMenu}
+            >
+              ☰
+            </button>
+          </div>
+          <ul className="xxs:hidden xs:flex gap-10 visible">
+            <li>
+              <Link to={"/"} className="link text-white">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to={"/services"} className="link text-white">
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link to={"/about"} className="link text-white">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to={"/contact"} className="link text-white">
+                Contact Info
+              </Link>
+            </li>
+          </ul>
         </div>
-        <ul className="xxs:hidden xs:flex gap-10 visible">
-          <li>
-            <Link to={"/"} className="link text-white">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to={"/services"} className="link text-white">
-              Services
-            </Link>
-          </li>
-          <li>
-            <Link to={"/about"} className="link text-white">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to={"/contact"} className="link text-white">
-              Contact Info
-            </Link>
-          </li>
-        </ul>
-      </div>
-      {isMobileMenuOpen && (
-        <ul className="mobile-menu-items bg-black-79 xs:hidden">
+
+        <ul
+          className={`  overflow-hidden ${
+            isMobileMenuOpen
+              ? "open-mobile flex flex-col gap-8 font-bold py-10 pl-6"
+              : "closed-mobile max-h-0 p-0"
+          }  xs:hidden`}
+        >
           <Link className="w-full" to={"/"}>
             <li>
               <Link
@@ -99,7 +104,7 @@ const NavBar = () => {
             </li>
           </Link>
         </ul>
-      )}
+      </div>
     </>
   );
 };
