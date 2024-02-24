@@ -216,12 +216,12 @@ const PopForm = ({
               />
             )
           )}
-          <div className="flex w-full justify-center items-center">
+          <div className="flex h-full m-10 justify-center items-center">
             <div className="pop-bg">
               <>
                 {/** Header */}
                 <div className="w-full font-sans flex flex-col items-center justify-center mt-10">
-                  <div className="home-send-email w-fit p-28 py-0 pb-6 bg-bg-box flex flex-col justify-center items-center text-center">
+                  <div className="xxs:rounded-3xl xs:rounded-full mt-10 xxs:p-3  xs:p-14 py-0 bg-bg-box flex flex-col justify-center items-center text-center">
                     <h2 className="section-title">
                       {showQuoteForm && (
                         <>
@@ -324,7 +324,9 @@ const PopForm = ({
                         {showQuoteForm || showCustomerService ? (
                           <div className="mb-4">
                             {submitted && errors.type && (
-                              <p className="font-red">Must include a type</p>
+                              <p className="font-red ml-5">
+                                Must include a type
+                              </p>
                             )}
                             <JobTypes
                               formDataType={formData.type}
@@ -372,6 +374,7 @@ const PopForm = ({
                           alt="close"
                         />
                       </button>
+                      <div className="h-10 w-10 absolute -bottom-10"></div>
                     </div>
                   </form>
                 </div>

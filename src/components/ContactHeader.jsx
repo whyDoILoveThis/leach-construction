@@ -8,7 +8,7 @@ const ContactHeader = () => {
   return (
     <div>
       <div className="pt-24 flex flex-col items-center">
-        <h2 className="section-title mb-8">🤙 Contact Us</h2>
+        <h2 className="section-title mb-10">🤙 Contact Us</h2>
 
         <div className="mb-4 ">
           <BtnGroup
@@ -20,9 +20,11 @@ const ContactHeader = () => {
             <BtnGroup contact={false} customerSevice={true} quote={false} />
           </div>
         </div>
-        <h2 className="section-title my-20">📞 601-555-8888</h2>
-        <h2 className="section-title mb-20">📧 Leach@construct.com</h2>
-        <h2 className="section-title mb-2">📍 Location</h2>
+        <h2 className="font-32px font-bold  my-20">
+          <a href="tel: 6015759987">📞 601-555-8888</a>
+        </h2>
+        <h2 className="font-32px font-bold mb-20">📧 Leach@construct.com</h2>
+        <h2 className="font-32px font-bold mb-2">📍 Location</h2>
         <img className="location rounded-3xl mb-20" src={location} alt="" />
       </div>
     </div>

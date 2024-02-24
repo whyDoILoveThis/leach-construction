@@ -5,10 +5,7 @@
       { "src": "/api/server", "dest": "/api/server.js" },
       { "src": "/services", "dest": "/src/Pages/Services.jsx" }
 
-    ],
-    
-      "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-    
+    ]    
     
     
   }
