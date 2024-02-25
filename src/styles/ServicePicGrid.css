@@ -1,0 +1,72 @@
+.pic0 {
+    width: 45%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.pic1 {
+    width: 55%;
+    height: 220px;
+    object-fit: cover;
+    
+}
+
+.pic2 {
+    width: 47%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.pic3 {
+    width: 53%;
+    height: 240px;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 600px) {
+    .wrap1 {
+        flex-direction: column;
+    }
+    .wrap2 {
+        flex-direction: column;
+    }
+    .pic0 {
+        width: 100%;
+        height: 260px;
+    }
+    
+    .pic1 {
+        width: 100%;
+        height: 260px;
+        
+    }
+    
+    .pic2 {
+        width: 100%;
+        height: 275px;
+    }
+    
+    .pic3 {
+        width: 100%;
+        height: 275px;
+    }
+}
+
+@media screen and (min-width: 776px) {
+    .pic0 {
+        height: 260px;
+    }
+    
+    .pic1 {
+        height: 260px;
+        
+    }
+    
+    .pic2 {
+        height: 275px;
+    }
+    
+    .pic3 {
+        height: 275px;
+    }
+}

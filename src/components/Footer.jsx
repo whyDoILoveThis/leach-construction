@@ -23,6 +23,10 @@ const Footer = () => {
 
   const serviceLinks = [
     {
+      title: "All Services",
+      link: "/services",
+    },
+    {
       title: "Bathrooms",
       link: "/bathrooms",
     },
@@ -67,12 +71,8 @@ const Footer = () => {
             className="footer-section-title xxs:flex xxs:p-8 xxs:py-6 xxs:rounded-3xl xxs:justify-between xxs:bg-white-transparent xxs:m-8 xs:hidden"
             onClick={toggleServicesLinks}
           >
-            <Link
-              className="m-link hover:bg-white-transparent rounded-2xl hover:px-4"
-              to={"/services"}
-            >
-              Services
-            </Link>{" "}
+            <p>Services</p>
+
             <img
               draggable={false}
               className={`w-14 h-14 chevron ${
@@ -111,12 +111,7 @@ const Footer = () => {
             className="footer-section-title xxs:flex xxs:p-8 xxs:py-6 xxs:rounded-3xl xxs:justify-between xxs:bg-white-transparent xxs:m-8 xs:hidden"
             onClick={toggleAboutLinks}
           >
-            <Link
-              className="m-link hover:bg-white-transparent rounded-2xl hover:px-4"
-              to={"/about"}
-            >
-              About
-            </Link>{" "}
+            <p>About</p>
             <img
               draggable={false}
               className={`w-14 h-14 chevron ${
@@ -131,6 +126,9 @@ const Footer = () => {
               showAboutLinks ? "fade-in" : "fade-out"
             }`}
           >
+            <li className="link">
+              <Link to={"/about"}>About Page</Link>
+            </li>
             <li className="link">
               <p
                 onClick={() => {
@@ -301,12 +299,7 @@ const Footer = () => {
             className="footer-section-title xxs:flex xxs:p-8 xxs:py-6 xxs:rounded-3xl xxs:justify-between xxs:bg-white-transparent xxs:m-8 xs:hidden"
             onClick={toggleContactLinks}
           >
-            <Link
-              className="m-link hover:bg-white-transparent rounded-2xl hover:px-4"
-              to={"/contact"}
-            >
-              Contact
-            </Link>{" "}
+            <p>Contact</p>
             <img
               draggable={false}
               className={`w-14 h-14 chevron ${
@@ -322,6 +315,9 @@ const Footer = () => {
               showContactLinks ? "fade-in" : "fade-out"
             }`}
           >
+            <li className="link">
+              <Link to={"/contact"}>Contact Page</Link>
+            </li>
             <li className="link">
               <p onClick={() => setShowQuoteForm(true)}>Get a Quote</p>
               {showQuoteForm && (

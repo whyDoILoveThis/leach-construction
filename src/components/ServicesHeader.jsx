@@ -10,7 +10,11 @@ const ServicesHeader = ({ title, text }) => {
   const customerService = false;
   const quote = true;
   return (
-    <div className="pt-24 flex flex-col items-center">
+    <div
+      className={`${
+        title === "" ? "pt-24" : "pt-44"
+      } flex flex-col items-center`}
+    >
       <h2 className="section-title">{title}</h2>
       <div className="my-text-box bg-bg-box p-6 mx-8 footer">
         <p>{text}</p>

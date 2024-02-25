@@ -142,7 +142,18 @@ h1 {
     font-weight: 500;
 }
 
+@media screen and (max-width: 675px) {
+    .hero-tag {
+       top: 8px;
+        margin-top: 50px;
+        width: 100%;
+        border-bottom-left-radius: 17px;
+    }
 
+    
+
+   
+}
 
 @media screen and (max-width: 500px) {
     .hero-tag {
@@ -150,7 +161,7 @@ h1 {
         right: 0;
         top: 0;
         margin-top: 50px;
-        width: unset;
+        width: 100%;
         border-bottom-left-radius: 17px;
     }
 
@@ -253,12 +264,6 @@ h1 {
    
 }
 
-@media screen and (max-width: 500px) {
-   .hero-tag {
-    width: 90%;
-   }
- }
- 
 
 @media screen and (max-width: 600px) {
    .input {

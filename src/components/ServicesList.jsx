@@ -61,10 +61,10 @@ const ServicesList = () => {
   return (
     <section className="mt-20">
       <div className="flex justify-center">
-        <div className="grid grid-cols-2 gap-20">
+        <div className="grid xxs:grid-cols-1 xs:grid-cols-2 xxs:gap-20 xxs:p-16 xs:gap-10 xs:px-6">
           {services.map((service, index) => (
             <Link to={service.link} key={index}>
-              <div className="w-[328px] ">
+              <div className="w-[100%] ">
                 <div className="flex justify-center items-center gap-4 mb-4">
                   <img className="w-14 h-14" src={service.icon} alt="" />
                   <h3>{service.title}</h3>
