@@ -7,8 +7,8 @@ const ContactHeader = () => {
   const quote = true;
   return (
     <div>
-      <div className="pt-24 flex flex-col items-center">
-        <h2 className="section-title mb-10">🤙 Contact Us</h2>
+      <div className="pt-32 flex flex-col items-center">
+        <h2 className="section-title  mb-10">🤙 Contact Us</h2>
 
         <div className="mb-4 ">
           <BtnGroup

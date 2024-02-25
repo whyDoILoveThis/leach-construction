@@ -437,10 +437,23 @@ h1 {
 .footer-section-list {
     display: flex;
     flex-direction: column;
-border-left: 1px solid white;
-padding-left: 15px;
-  
+    border-left: 1px solid white;
+    padding-left: 15px;
+    transition: max-height 0.5s ease, opacity 0.2s ease;
+    overflow: hidden;
+    
 }
+  
+  .fade-in {
+    max-height: 300px;
+    opacity: 1;
+  }
+  
+  .fade-out {
+    max-height: 0;
+    opacity: 0;
+  }
+  
 
 .copyright {
     font-size: 12px;

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import PopModal from "./PopModal";
 import PopForm from "./PopForm";
 import Logo from "../assets/logo.png";
+import facebook from "../assets/social/facebook.png";
+import twitterx from "../assets/social/twitterx.png";
 import chevron from "../assets/icons/chevron.png";
 
 const Footer = () => {
@@ -80,15 +82,17 @@ const Footer = () => {
               alt=""
             />
           </h3>
-          {showServicesLinks && (
-            <ul className="footer-section-list xxs:inline xxs:ml-14 xs:hidden">
-              {serviceLinks.map((service, index) => (
-                <li key={index} className="link">
-                  <Link to={service.link}>{service.title}</Link>
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul
+            className={`footer-section-list xxs:inline xxs:ml-14 xs:hidden ${
+              showServicesLinks ? "fade-in" : "fade-out"
+            }`}
+          >
+            {serviceLinks.map((service, index) => (
+              <li key={index} className="link">
+                <Link to={service.link}>{service.title}</Link>
+              </li>
+            ))}
+          </ul>
           <ul className="footer-section-list xxs:hidden xs:inline">
             {serviceLinks.map((service, index) => (
               <li key={index} className="link">
@@ -122,18 +126,27 @@ const Footer = () => {
               alt=""
             />
           </h3>
-          {showAboutLinks && (
-            <ul className="footer-section-list xxs:inline xxs:ml-14 xs:hidden">
-              <li className="link">
-                <p onClick={() => setCompanyModal(true)}>The Company</p>
-                {companyModal && (
-                  <PopModal
-                    visibility={true}
-                    close={() => setCompanyModal(false)}
-                    color=""
-                    title="About Our Company"
-                    lgText=""
-                    smText={`At Leach Construction, we take pride in being your trusted partner for all your 
+          <ul
+            className={`footer-section-list xxs:inline xxs:ml-14 xs:hidden ${
+              showAboutLinks ? "fade-in" : "fade-out"
+            }`}
+          >
+            <li className="link">
+              <p
+                onClick={() => {
+                  showAboutLinks && setCompanyModal(true);
+                }}
+              >
+                The Company
+              </p>
+              {companyModal && (
+                <PopModal
+                  visibility={true}
+                  close={() => setCompanyModal(false)}
+                  color=""
+                  title="About Our Company"
+                  lgText=""
+                  smText={`At Leach Construction, we take pride in being your trusted partner for all your 
                     construction and handyman needs. With years of experience serving our local community,
                     we've built a reputation for excellence, reliability, and exceptional craftsmanship. 
                     Our dedicated team of professionals is committed to exceeding your expectations, 
@@ -143,19 +156,25 @@ const Footer = () => {
                     small, is completed to the highest standards. When you choose Leach Construction, 
                     you're choosing quality, integrity, and a partner you can trust. Contact us today 
                     to experience the difference firsthand!`}
-                  />
-                )}
-              </li>
-              <li className="link">
-                <p onClick={() => setOwnerModal(true)}>The Owner</p>
-                {ownerModal && (
-                  <PopModal
-                    visibility={true}
-                    close={() => setOwnerModal(false)}
-                    color=""
-                    title="About The Owner"
-                    lgText=""
-                    smText={`👋 Hello! I'm Michael Leach, the proud owner and driving force behind Leach
+                />
+              )}
+            </li>
+            <li className="link">
+              <p
+                onClick={() => {
+                  showAboutLinks && setOwnerModal(true);
+                }}
+              >
+                The Owner
+              </p>
+              {ownerModal && (
+                <PopModal
+                  visibility={true}
+                  close={() => setOwnerModal(false)}
+                  color=""
+                  title="About The Owner"
+                  lgText=""
+                  smText={`👋 Hello! I'm Michael Leach, the proud owner and driving force behind Leach
                     Construction. With a passion for construction and a commitment to excellence, I
                     founded this company with the vision of providing unparalleled service and 
                     craftsmanship to our community. With 30 years of experience in the industry, I 
@@ -167,19 +186,25 @@ const Footer = () => {
                     you're not just getting a construction service – you're getting a partner who
                     is personally invested in the success of your project. Thank you for considering
                     us for your next endeavor!`}
-                  />
-                )}
-              </li>
-              <li className="link">
-                <p onClick={() => setPromiseModal(true)}>Our Promise</p>
-                {promiseModal && (
-                  <PopModal
-                    visibility={true}
-                    close={() => setPromiseModal(false)}
-                    color=""
-                    title="Our Promise to You"
-                    lgText=""
-                    smText={`At Leach Construction, we stand by our commitment to excellence and customer 
+                />
+              )}
+            </li>
+            <li className="link">
+              <p
+                onClick={() => {
+                  showAboutLinks && setPromiseModal(true);
+                }}
+              >
+                Our Promise
+              </p>
+              {promiseModal && (
+                <PopModal
+                  visibility={true}
+                  close={() => setPromiseModal(false)}
+                  color=""
+                  title="Our Promise to You"
+                  lgText=""
+                  smText={`At Leach Construction, we stand by our commitment to excellence and customer 
                     satisfaction. Our promise to you is simple: to deliver exceptional service, quality 
                     workmanship, and a stress-free experience from start to finish. We understand that
                     entrusting your home to us is a significant decision, and we take that responsibility 
@@ -190,11 +215,10 @@ const Footer = () => {
                     own. With Leach Construction, you can rest assured that your home is in capable
                     hands. Experience the difference of working with a team that puts your needs first.
                     Contact us today and let's bring your vision to life together!`}
-                  />
-                )}
-              </li>
-            </ul>
-          )}
+                />
+              )}
+            </li>
+          </ul>
           <ul className="footer-section-list xxs:hidden xs:inline">
             <li className="link">
               <p onClick={() => setCompanyModal(true)}>The Company</p>
@@ -292,36 +316,40 @@ const Footer = () => {
               alt=""
             />
           </h3>
-          {showContactLinks && (
-            <ul className="footer-section-list xxs:inline xxs:ml-14 xs:hidden">
-              <li className="link">
-                <p onClick={() => setShowQuoteForm(true)}>Get a Quote</p>
-                {showQuoteForm && (
-                  <PopForm
-                    openForm={showQuoteForm}
-                    setOpenForm={setShowQuoteForm}
-                    showCustomerService={false}
-                    showContactForm={false}
-                    showQuoteForm={true}
-                  />
-                )}
-              </li>
-              <li className="link">
-                <p onClick={() => setShowRequestForm(true)}>
-                  Customer <br /> Service Request
-                </p>
-                {showRequestForm && (
-                  <PopForm
-                    openForm={showRequestForm}
-                    setOpenForm={setShowRequestForm}
-                    showCustomerService={true}
-                    showContactForm={false}
-                    showQuoteForm={false}
-                  />
-                )}
-              </li>
-            </ul>
-          )}
+
+          <ul
+            className={`footer-section-list xxs:inline xxs:ml-14 xs:hidden ${
+              showContactLinks ? "fade-in" : "fade-out"
+            }`}
+          >
+            <li className="link">
+              <p onClick={() => setShowQuoteForm(true)}>Get a Quote</p>
+              {showQuoteForm && (
+                <PopForm
+                  openForm={showQuoteForm}
+                  setOpenForm={setShowQuoteForm}
+                  showCustomerService={false}
+                  showContactForm={false}
+                  showQuoteForm={true}
+                />
+              )}
+            </li>
+            <li className="link">
+              <p onClick={() => setShowRequestForm(true)}>
+                Customer <br /> Service Request
+              </p>
+              {showRequestForm && (
+                <PopForm
+                  openForm={showRequestForm}
+                  setOpenForm={setShowRequestForm}
+                  showCustomerService={true}
+                  showContactForm={false}
+                  showQuoteForm={false}
+                />
+              )}
+            </li>
+          </ul>
+
           <ul className="footer-section-list xxs:hidden xs:inline">
             <li className="link">
               <p onClick={() => setShowQuoteForm(true)}>Get a Quote</p>
@@ -351,6 +379,14 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+      </div>
+      <div>
+        <Link>
+          <img src={facebook} alt="facebook" />
+        </Link>
+        <Link>
+          <img src={twitterx} alt="twitter" />
+        </Link>
       </div>
       <div className="copyright w-full flex justify-center mt-20">
         <p>©2024 Site Made By - Ian Thai Smith</p>
