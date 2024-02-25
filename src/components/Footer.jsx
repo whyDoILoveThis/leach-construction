@@ -380,15 +380,15 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div>
+      <div className="flex items-center gap-12 ml-12 mt-6">
         <Link>
-          <img src={facebook} alt="facebook" />
+          <img className="w-16 " src={facebook} alt="facebook" />
         </Link>
         <Link>
-          <img src={twitterx} alt="twitter" />
+          <img className="w-12" src={twitterx} alt="twitter" />
         </Link>
       </div>
-      <div className="copyright w-full flex justify-center mt-20">
+      <div className="copyright w-full flex justify-center mt-6">
         <p>©2024 Site Made By - Ian Thai Smith</p>
       </div>
     </div>
